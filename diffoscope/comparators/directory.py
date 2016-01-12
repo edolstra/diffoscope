@@ -47,14 +47,18 @@ class Stat(Command):
     FILE_RE = re.compile(r'^\s*File:.*$')
     DEVICE_RE = re.compile(r'Device: [0-9a-f]+h/[0-9]+d')
     INODE_RE = re.compile(r'Inode: [0-9]+')
+    LINKS_RE = re.compile(r'Links: [0-9]+')
     ACCESS_TIME_RE = re.compile(r'^Access: [0-9]{4}-[0-9]{2}-[0-9]{2}.*$')
+    CHANGE_TIME_RE = re.compile(r'^Change: [0-9]{4}-[0-9]{2}-[0-9]{2}.*$')
 
     def filter(self, line):
         line = line.decode('utf-8')
         line = Stat.FILE_RE.sub('', line)
         line = Stat.DEVICE_RE.sub('', line)
         line = Stat.INODE_RE.sub('', line)
+        line = Stat.LINKS_RE.sub('', line)
         line = Stat.ACCESS_TIME_RE.sub('', line)
+        line = Stat.CHANGE_TIME_RE.sub('', line)
         return line.encode('utf-8')
 
 
